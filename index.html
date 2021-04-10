@@ -14,32 +14,34 @@
             <td>
                 <label for="name">Navn:</label>
             </td>
-            <td><input id="name" type="text" data-target="filledName"></td>
+            <td><input id="name" class="text-input" type="text" data-target="filledName"></td>
         </tr>
         <tr>
             <td>
                 <label for="street">Adresse:</label>
             </td>
-            <td><input id="street" type="text" data-target="filledAddress"></td>
+            <td><input id="street" class="text-input" type="text" data-target="filledAddress"></td>
         </tr>
         <tr>
             <td>
                 <label for="email">E-post:</label>
             </td>
-            <td><input id="email" type="text" data-target="filledEmail"></td>
+            <td><input id="email" class="text-input" type="text" data-target="filledEmail"></td>
         </tr>
         <tr>
             <td>
                 <label for="telephone">Mobil:</label>
             </td>
-            <td><input id="telephone" data-target="filledPhoneNum"></td>
+            <td><input id="telephone" class="text-input" data-target="filledPhoneNum"></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="photo">Profile photo:</label>
+            </td>
+            <td><input id="photo" type="file" size="5"></td>
         </tr>
 
     </table>
-    <div class="profPictureContainer">
-        <img id="profileImg" class="profPic" src="prof_pic.png" alt="profilePicture">
-        <input id="imageUpload" type="file" size="5">
-    </div>
     <div class="inputSectionTitle">Education</div>
     <table id="education">
         <tr>
@@ -48,39 +50,39 @@
             <th>Speciality</th>
         </tr>
         <tr>
-            <td><input id="year1" type="text" data-target="filledYear1"></td>
-            <td><input id="university1" type="text" data-target="filledUniversity1"></td>
-            <td><input id="speciality1" type="text" data-target="filledSpeciality1"></td>
+            <td><input id="year1" class="text-input" type="text" data-target="filledYear1"></td>
+            <td><input id="university1" class="text-input" type="text" data-target="filledUniversity1"></td>
+            <td><input id="speciality1" class="text-input" type="text" data-target="filledSpeciality1"></td>
         </tr>
         <tr>
-            <td><input id="year2" type="text" data-target="filledYear2"></td>
-            <td><input id="university2" type="text" data-target="filledUniversity2"></td>
-            <td><input id="speciality2" type="text" data-target="filledSpeciality2"></td>
+            <td><input id="year2" class="text-input" type="text" data-target="filledYear2"></td>
+            <td><input id="university2" class="text-input" type="text" data-target="filledUniversity2"></td>
+            <td><input id="speciality2" class="text-input" type="text" data-target="filledSpeciality2"></td>
         </tr>
         <tr>
-            <td><input id="year3" type="text" data-target="filledYear3"></td>
-            <td><input id="university3" type="text" data-target="filledUniversity3"></td>
-            <td><input id="speciality3" type="text" data-target="filledSpeciality3"></td>
+            <td><input id="year3" class="text-input" type="text" data-target="filledYear3"></td>
+            <td><input id="university3" class="text-input" type="text" data-target="filledUniversity3"></td>
+            <td><input id="speciality3" class="text-input" type="text" data-target="filledSpeciality3"></td>
         </tr>
         <tr>
-            <td><input id="year4" type="text" data-target="filledYear4"></td>
-            <td><input id="university4" type="text" data-target="filledUniversity4"></td>
-            <td><input id="speciality4" type="text" data-target="filledSpeciality4"></td>
+            <td><input id="year4" class="text-input" type="text" data-target="filledYear4"></td>
+            <td><input id="university4" class="text-input" type="text" data-target="filledUniversity4"></td>
+            <td><input id="speciality4" class="text-input" type="text" data-target="filledSpeciality4"></td>
         </tr>
         <tr>
-            <td><input id="year5" type="text" data-target="filledYear5"></td>
-            <td><input id="university5" type="text" data-target="filledUniversity5"></td>
-            <td><input id="speciality5" type="text" data-target="filledSpeciality5"></td>
+            <td><input id="year5" class="text-input" type="text" data-target="filledYear5"></td>
+            <td><input id="university5" class="text-input" type="text" data-target="filledUniversity5"></td>
+            <td><input id="speciality5" class="text-input" type="text" data-target="filledSpeciality5"></td>
         </tr>
         <tr>
-            <td><input id="year6" type="text" data-target="filledYear6"></td>
-            <td><input id="university6" type="text" data-target="filledUniversity6"></td>
-            <td><input id="speciality6" type="text" data-target="filledSpeciality6"></td>
+            <td><input id="year6" class="text-input" type="text" data-target="filledYear6"></td>
+            <td><input id="university6" class="text-input" type="text" data-target="filledUniversity6"></td>
+            <td><input id="speciality6" class="text-input" type="text" data-target="filledSpeciality6"></td>
         </tr>
         <tr>
-            <td><input id="year7" type="text" data-target="filledYear7"></td>
-            <td><input id="university7" type="text" data-target="filledUniversity7"></td>
-            <td><input id="speciality7" type="text" data-target="filledSpeciality7"></td>
+            <td><input id="year7" class="text-input" type="text" data-target="filledYear7"></td>
+            <td><input id="university7" class="text-input" type="text" data-target="filledUniversity7"></td>
+            <td><input id="speciality7" class="text-input" type="text" data-target="filledSpeciality7"></td>
         </tr>
     </table>
 </div>
@@ -96,7 +98,7 @@
             </div>
             <div class="contactContainer">
             <span id="filledAddress">adresse</span><br>
-            <span id="filledEmail">e-post,</span>
+            <span id="filledEmail">e-post</span>,
             <span id="filledPhoneNum">mobil</span>
             </div>
         </div>

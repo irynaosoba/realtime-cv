@@ -8,12 +8,15 @@ body {
 .inputCvData {
     padding: 10px;
     margin-right: 15px;
-    width: 40%;
+    width: 100%;
     background-color: #f4f7f8;
+    transition: width 700ms;
 }
 
 .finalCv {
-    width: 60%;
+    display: none;
+    width: 0;
+    transition: width 700ms;
 }
 
 .mainInfo {
@@ -40,24 +43,31 @@ th {
 .mainPartOfCv {
     height: 132px;
     background-color: #f6fcf9;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
 }
 
 .mainInfoContainer{
-    float: right;
-    width: 74%;
-    margin-top: 73px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .profPic {
     width: 112px;
     height: 112px;
-    margin-left: 43px;
-    margin-top: 10px;
     border-radius: 50%;
 }
 
 .profPictureContainer {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 200px;
 }
 
 #nameContainer {
@@ -66,12 +76,6 @@ th {
     font-size: 16px;
     font-weight: bold;
     margin-top: 10px;
-}
-
-.contactContainer {
-    float: right;
-    width: 70%;
-    text-align: left;
 }
 
 .leftPartOfCv {
@@ -142,4 +146,8 @@ th {
 
 #education {
     width: 100%;
+}
+
+#filledName {
+    margin-right: 50px;
 }
