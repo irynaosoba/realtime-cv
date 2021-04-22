@@ -114,6 +114,7 @@ th {
 
     font-size: 15px;
     font-weight: bold;
+    word-break: break-word;
 }
 
 .yearOfActivity{
@@ -131,6 +132,7 @@ th {
     width: 100%;
     margin-bottom: 15px;
     font-size: 13px;
+    word-break: break-word;
 }
 
 #imageUpload {
