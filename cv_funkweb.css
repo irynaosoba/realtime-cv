@@ -20,13 +20,13 @@ body {
 }
 
 .mainInfo {
-    float: left;
-    width: 60%;
+    width: 100%;
     margin-bottom: 50px;
     font-size: 14px;
 }
 
 input {
+    padding: 1px 2px;
     border: none;
     border-radius: 5px;
     width: 98%;
@@ -61,6 +61,17 @@ th {
     width: 112px;
     height: 112px;
     border-radius: 50%;
+}
+
+#reset {
+    width: 84px;
+    margin-top: 4px;
+}
+
+#reset:active {
+    width: 80px;
+    margin-left: 2px;
+    background-color: #d9ffff;
 }
 
 .profPictureContainer {
@@ -163,4 +174,8 @@ th {
     margin-right: 50px;
     font-weight: 600;
     font-size: 17px;
+}
+
+.tables.otherInfoTable tr:nth-of-type(n+2) td:first-of-type input {
+    display: none;
 }
