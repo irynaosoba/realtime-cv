@@ -13,6 +13,7 @@ $(document).ready(function() {
         const targetId = $(this).data('target');
         $('#' + targetId).text(value);
 
+        deleteRow($(this));
         // showCv();
     })
 
@@ -58,6 +59,8 @@ $(document).ready(function() {
                 defaultValue = "";
             }
             target.text(defaultValue);
+
+            $('.removeRow').remove();
         });
 
         $('#photo').each(function () {
@@ -85,8 +88,8 @@ function addNewRow(input, section){
     if (trIndex === trLength - 1){
         switch (section){
             case 'education':
-                const newTrEducation = $('<tr>\n' +
-                    `            <td><input class="text-input" type="text" data-target="filledEducationYear${trIndex}"></td>\n` +
+                const newTrEducation = $('<tr class="removeRow">\n' +
+                    `            <td><input class="text-input" type="text" maxlength="11" data-target="filledEducationYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledUniversity${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledSpeciality${trIndex}"></td>\n` +
                     '        </tr>');
@@ -95,6 +98,7 @@ function addNewRow(input, section){
                     const targetId = $(this).data('target');
                     $('#' + targetId).text(value);
                     addNewRow($(this), 'education')
+                    deleteRow($(this));
                 });
 
                 parentTable.append(newTrEducation);
@@ -111,8 +115,8 @@ function addNewRow(input, section){
                 break;
 
             case 'job':
-                const newTrJob = $('<tr>\n' +
-                    `            <td><input class="text-input" type="text" data-target="filledJobYear${trIndex}"></td>\n` +
+                const newTrJob = $('<tr class="removeRow">\n' +
+                    `            <td><input class="text-input" type="text" maxlength="11" data-target="filledJobYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledJobCompany${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledJobTitle${trIndex}"></td>\n` +
                     '        </tr>');
@@ -120,14 +124,15 @@ function addNewRow(input, section){
                     let value = $(this).val();
                     const targetId = $(this).data('target');
                     $('#' + targetId).text(value);
-                    addNewRow($(this), 'job')
+                    addNewRow($(this), 'job');
+                    deleteRow($(this));
                 });
 
                 parentTable.append(newTrJob);
 
                 const newDivJob = $('<div>\n' +
                     `                <div id="filledJobCompany${trIndex}" class="sectionTitle"></div>\n` +
-                    `                <div id="filledJobYear${trIndex}" class="yearOfActivity"></div>\n` +
+                    `                <div id="filledJobYear${trIndex}" maxlength="11" class="yearOfActivity"></div>\n` +
                     `                <div  id="filledJobTitle${trIndex}" class="sectionInfo"></div>\n` +
                     '            </div>');
 
@@ -137,8 +142,8 @@ function addNewRow(input, section){
                 break;
 
             case 'course':
-                const newTrCourse = $('<tr>\n' +
-                        `            <td><input class="text-input" type="text" data-target="filledCourseYear${trIndex}"></td>\n` +
+                const newTrCourse = $('<tr class="removeRow">\n' +
+                        `            <td><input class="text-input" type="text" maxlength="11" data-target="filledCourseYear${trIndex}"></td>\n` +
                         `            <td><input class="text-input" type="text" data-target="filledCourseCompany${trIndex}"></td>\n` +
                         `            <td><input class="text-input" type="text" data-target="filledCourseName${trIndex}"></td>\n` +
                         '        </tr>');
@@ -146,7 +151,8 @@ function addNewRow(input, section){
                     let value = $(this).val();
                     const targetId = $(this).data('target');
                     $('#' + targetId).text(value);
-                    addNewRow($(this), 'course')
+                    addNewRow($(this), 'course');
+                    deleteRow($(this));
                 });
 
                 parentTable.append(newTrCourse);
@@ -162,7 +168,7 @@ function addNewRow(input, section){
                 break;
 
             case 'language':
-                const newTrLanguage = $('<tr>\n' +
+                const newTrLanguage = $('<tr class="removeRow">\n' +
                     `            <td></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="language${trIndex +1}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="languageLevel${trIndex +1}"></td>\n` +
@@ -171,7 +177,8 @@ function addNewRow(input, section){
                     let value = $(this).val();
                     const targetId = $(this).data('target');
                     $('#' + targetId).text(value);
-                    addNewRow($(this), 'language')
+                    addNewRow($(this), 'language');
+                    deleteRow($(this));
                 });
 
                 parentTable.append(newTrLanguage);
@@ -187,7 +194,7 @@ function addNewRow(input, section){
                 break;
 
             case 'certificate':
-                const newTrCertificate = $('<tr>\n' +
+                const newTrCertificate = $('<tr class="removeRow">\n' +
                     '            <td></td>\n' +
                     `            <td><input class="text-input" type="text" data-target="certificate${trIndex + 1}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="certificateLevel${trIndex + 1}"></td>\n` +
@@ -196,7 +203,8 @@ function addNewRow(input, section){
                     let value = $(this).val();
                     const targetId = $(this).data('target');
                     $('#' + targetId).text(value);
-                    addNewRow($(this), 'certificate')
+                    addNewRow($(this), 'certificate');
+                    deleteRow($(this));
                 });
                 parentTable.append(newTrCertificate);
 
@@ -210,7 +218,7 @@ function addNewRow(input, section){
                 showCvSection('language')
                 break;
             case 'hobby':
-                const newTrHobby = $('<tr>\n' +
+                const newTrHobby = $('<tr class="removeRow">\n' +
                     '            <td></td>\n' +
                     `            <td><input class="text-input" type="text" data-target="hobby${trIndex + 1}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="anotherHobby${trIndex + 1}"></td>\n` +
@@ -219,7 +227,8 @@ function addNewRow(input, section){
                     let value = $(this).val();
                     const targetId = $(this).data('target');
                     $('#' + targetId).text(value);
-                    addNewRow($(this), 'hobby')
+                    addNewRow($(this), 'hobby');
+                    deleteRow($(this));
                 });
 
                 parentTable.append(newTrHobby);
@@ -235,8 +244,6 @@ function addNewRow(input, section){
                 break;
                     }
                 }
-
-
     }
 
 function showCvSection(section) {
@@ -246,7 +253,25 @@ function showCvSection(section) {
     }
 }
 
-//
+
+function deleteRow(input){
+    const parentTable = $(input).parents('.tables');
+    const tableChildren = parentTable.find('tr').length;
+    if (tableChildren > 2){
+        const parentTr = $(input).parents('tr');
+        let allInputsEmpty = true;
+        parentTr.find('.text-input').each(function(){
+            if ($(this).val()){
+                allInputsEmpty = false;
+            }
+        });
+
+        if (allInputsEmpty){
+            parentTr.remove();
+        }
+    }
+}
+
 // function showCv() {
 //     const finalCvDiv = $('.finalCv')
 //     if (finalCvDiv.css('display') === 'none'){
