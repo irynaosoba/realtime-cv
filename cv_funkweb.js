@@ -18,7 +18,7 @@ $(document).ready(function() {
     })
 
     $("#photo").change(function (event) {
-        let newImg = URL.createObjectURL(event.target.files[0]);
+        const newImg = URL.createObjectURL(event.target.files[0]);
         $('#profileImg1').attr('src', newImg);
 
         // showCv();
@@ -60,7 +60,8 @@ $(document).ready(function() {
             }
             target.text(defaultValue);
 
-            $('.removeRow').remove();
+            $('.tables tr:nth-of-type(n+3)').remove();
+            $('.otherInfoTable tr:nth-of-type(n+2)').remove();
         });
 
         $('#photo').each(function () {
@@ -88,7 +89,7 @@ function addNewRow(input, section){
     if (trIndex === trLength - 1){
         switch (section){
             case 'education':
-                const newTrEducation = $('<tr class="removeRow">\n' +
+                const newTrEducation = $('<tr>\n' +
                     `            <td><input class="text-input" type="text" maxlength="11" data-target="filledEducationYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledUniversity${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledSpeciality${trIndex}"></td>\n` +
@@ -115,7 +116,7 @@ function addNewRow(input, section){
                 break;
 
             case 'job':
-                const newTrJob = $('<tr class="removeRow">\n' +
+                const newTrJob = $('<tr>\n' +
                     `            <td><input class="text-input" type="text" maxlength="11" data-target="filledJobYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledJobCompany${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledJobTitle${trIndex}"></td>\n` +
@@ -132,7 +133,7 @@ function addNewRow(input, section){
 
                 const newDivJob = $('<div>\n' +
                     `                <div id="filledJobCompany${trIndex}" class="sectionTitle"></div>\n` +
-                    `                <div id="filledJobYear${trIndex}" maxlength="11" class="yearOfActivity"></div>\n` +
+                    `                <div id="filledJobYear${trIndex}" class="yearOfActivity"></div>\n` +
                     `                <div  id="filledJobTitle${trIndex}" class="sectionInfo"></div>\n` +
                     '            </div>');
 
@@ -142,7 +143,7 @@ function addNewRow(input, section){
                 break;
 
             case 'course':
-                const newTrCourse = $('<tr class="removeRow">\n' +
+                const newTrCourse = $('<tr>\n' +
                         `            <td><input class="text-input" type="text" maxlength="11" data-target="filledCourseYear${trIndex}"></td>\n` +
                         `            <td><input class="text-input" type="text" data-target="filledCourseCompany${trIndex}"></td>\n` +
                         `            <td><input class="text-input" type="text" data-target="filledCourseName${trIndex}"></td>\n` +
@@ -168,8 +169,8 @@ function addNewRow(input, section){
                 break;
 
             case 'language':
-                const newTrLanguage = $('<tr class="removeRow">\n' +
-                    `            <td></td>\n` +
+                const newTrLanguage = $('<tr>\n' +
+                    `            <td><input value="Språk" readonly></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="language${trIndex +1}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="languageLevel${trIndex +1}"></td>\n` +
                     '        </tr>');
@@ -194,8 +195,8 @@ function addNewRow(input, section){
                 break;
 
             case 'certificate':
-                const newTrCertificate = $('<tr class="removeRow">\n' +
-                    '            <td></td>\n' +
+                const newTrCertificate = $('<tr>\n' +
+                    '            <td><input value="Sertifikat" readonly></td>\n' +
                     `            <td><input class="text-input" type="text" data-target="certificate${trIndex + 1}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="certificateLevel${trIndex + 1}"></td>\n` +
                     '        </tr>');
@@ -218,8 +219,8 @@ function addNewRow(input, section){
                 showCvSection('language')
                 break;
             case 'hobby':
-                const newTrHobby = $('<tr class="removeRow">\n' +
-                    '            <td></td>\n' +
+                const newTrHobby = $('<tr>\n' +
+                    '            <td><input value="Interesser" readonly></td>\n' +
                     `            <td><input class="text-input" type="text" data-target="hobby${trIndex + 1}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="anotherHobby${trIndex + 1}"></td>\n` +
                     '        </tr>');
@@ -253,11 +254,10 @@ function showCvSection(section) {
     }
 }
 
-
 function deleteRow(input){
     const parentTable = $(input).parents('.tables');
     const tableChildren = parentTable.find('tr').length;
-    if (tableChildren > 2){
+    if (tableChildren > (parentTable.hasClass('otherInfoTable') ? 1 : 2)){
         const parentTr = $(input).parents('tr');
         let allInputsEmpty = true;
         parentTr.find('.text-input').each(function(){
