@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="inputCvData">
-    <table class="mainInfo tables">
+    <table class="mainInfo">
         <tr>
             <td><label for="name">Navn:</label></td>
             <td><input id="name" class="text-input" type="text" data-target="filledName"></td>
@@ -27,12 +27,12 @@
             <td><input id="telephone" type="text" class="text-input" data-target="filledPhoneNum"></td>
         </tr>
         <tr>
-            <td><label for="photo">Profile photo:</label></td>
+            <td><label for="photo">Profile picture:</label></td>
             <td><input id="photo" type="file" size="5"></td>
         </tr>
         <tr>
-            <td><label>Reset:</label></td>
-            <td><input type="reset" id="reset" value="Reset"></td>
+            <td></td>
+            <td><input type="reset" id="reset" readonly value="Reset"></td>
         </tr>
     </table>
 
@@ -74,26 +74,26 @@
         <tr>
             <td><input class="text-input" type="text" maxlength="11" data-target="filledCourseYear0"></td>
             <td><input class="text-input" type="text" data-target="filledCourseCompany0"></td>
-            <td><input class="text-input newRow" type="text" data-target="filledCourseName0"></td>
+            <td><input class="text-input" type="text" data-target="filledCourseName0"></td>
         </tr>
     </table>
 
     <div class="inputSectionTitle">Andre opplysninger</div>
-    <table class="tables language">
+    <table class="tables otherInfoTable language">
         <tr>
             <td><input value="Språk" readonly data-target="languageSection"></td>
             <td><input class="text-input" type="text" data-target="language0"></td>
             <td><input class="text-input" type="text" data-target="languageLevel0"></td>
         </tr>
     </table>
-    <table class="tables certificate">
+    <table class="tables otherInfoTable certificate">
         <tr>
             <td><input value="Sertifikat" readonly data-target="certificateSection"></td>
             <td><input class="text-input" type="text" data-target="certificate0"></td>
             <td><input class="text-input" type="text" data-target="certificateLevel0"></td>
         </tr>
     </table>
-    <table class="tables hobby">
+    <table class="tables otherInfoTable hobby">
         <tr>
             <td><input value="Interesser" readonly data-target="hobbySection"></td>
             <td><input class="text-input" type="text" data-target="hobby0"></td>
