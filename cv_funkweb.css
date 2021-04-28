@@ -9,7 +9,7 @@ body {
     padding: 10px;
     margin-right: 15px;
     width: 40%;
-    background: linear-gradient(to bottom, #5B39ED 0%, #F35472 100%);
+    background: linear-gradient(to bottom, #ffc371 0%, #FF5F6D 100%);
     transition: width 700ms;
 }
 
