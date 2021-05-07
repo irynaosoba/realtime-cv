@@ -20,21 +20,29 @@
         </tr>
         <tr>
             <td><label for="email">E-post:</label></td>
-            <td><input id="email" class="text-input" type="text" data-target="filledEmail"></td>
+            <td><input id="email" class="text-input" type="email" data-target="filledEmail" onblur="checkEmail()"></td>
         </tr>
         <tr>
             <td><label for="telephone">Mobil:</label></td>
-            <td><input id="telephone" type="text" class="text-input" data-target="filledPhoneNum"></td>
+            <td><input id="telephone" type="number" class="text-input" data-target="filledPhoneNum"></td>
         </tr>
         <tr>
-            <td><label for="photo">Profile picture:</label></td>
-            <td><input id="photo" type="file" size="5"></td>
+            <td><label for="civilStatus">Sivilstatus:</label></td>
+            <td><input id="civilStatus" type="text" class="text-input" data-target="filledCivilStatus"></td>
+        </tr>
+        <tr>
+            <td><label for="birth">Født:</label></td>
+            <td><input id="birth" type="text" class="text-input" data-target="filledBirth"></td>
         </tr>
         <tr>
             <td></td>
             <td><input type="reset" id="reset" readonly value="Reset"></td>
         </tr>
     </table>
+
+
+    <div class="inputSectionTitle">Nøkkelkompetanse:</div>
+    <textarea id="competence" maxlength="1000" data-target="competenceSectionText"></textarea>
 
     <div class="inputSectionTitle">Education</div>
     <table class="tables education">
@@ -47,6 +55,7 @@
             <td><input class="text-input" type="text" maxlength="11" data-target="filledEducationYear0"></td>
             <td><input class="text-input" type="text" data-target="filledUniversity0"></td>
             <td><input class="text-input" type="text" data-target="filledSpeciality0"></td>
+            <td><input type="button" class="resetButton" data-target="educationButton0" onclick="deleteRowWithButton()"></td>
         </tr>
     </table>
 
@@ -61,6 +70,7 @@
             <td><input class="text-input" type="text" maxlength="11" data-target="filledJobYear0"></td>
             <td><input class="text-input" type="text" data-target="filledJobCompany0"></td>
             <td><input class="text-input" type="text" data-target="filledJobTitle0"></td>
+            <td><input type="button" class="resetButton" data-target="jobButton0" onclick="deleteRowWithButton()"></td>
         </tr>
     </table>
 
@@ -75,6 +85,7 @@
             <td><input class="text-input" type="text" maxlength="11" data-target="filledCourseYear0"></td>
             <td><input class="text-input" type="text" data-target="filledCourseCompany0"></td>
             <td><input class="text-input" type="text" data-target="filledCourseName0"></td>
+            <td><input type="button" class="resetButton" data-target="courseButton0" onclick="deleteRowWithButton()"></td>
         </tr>
     </table>
 
@@ -84,6 +95,7 @@
             <td><input value="Språk" readonly data-target="languageSection"></td>
             <td><input class="text-input" type="text" data-target="language0"></td>
             <td><input class="text-input" type="text" data-target="languageLevel0"></td>
+            <td><input type="button" class="resetButton" data-target="languageButton0" onclick="deleteRowWithButton()"></td>
         </tr>
     </table>
     <table class="tables otherInfoTable certificate">
@@ -91,6 +103,7 @@
             <td><input value="Sertifikat" readonly data-target="certificateSection"></td>
             <td><input class="text-input" type="text" data-target="certificate0"></td>
             <td><input class="text-input" type="text" data-target="certificateLevel0"></td>
+            <td><input type="button" class="resetButton" data-target="certificateButton0" onclick="deleteRowWithButton()"></td>
         </tr>
     </table>
     <table class="tables otherInfoTable hobby">
@@ -98,80 +111,101 @@
             <td><input value="Interesser" readonly data-target="hobbySection"></td>
             <td><input class="text-input" type="text" data-target="hobby0"></td>
             <td><input class="text-input" type="text" data-target="anotherHobby0"></td>
+            <td><input type="button" class="resetButton" data-target="hobbyButton0" onclick="deleteRowWithButton()"></td>
+
         </tr>
     </table>
 </div>
 
 <div class="finalCv">
-    <div class="mainPartOfCv">
-        <div class="profPictureContainer">
-            <img id="profileImg1" class="profPic" src="prof_pic.png">
-        </div>
-        <div class="mainInfoContainer">
-            <div id="filledName" data-default="Navn">Navn</div>
-            <div class="contactContainer">
-                <span id="filledAddress" data-default="adresse">adresse</span><br>
-                <span id="filledEmail" data-default="e-post">e-post</span>,
-                <span id="filledPhoneNum" data-default="mobil">mobil</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="leftCvPart">
-        <div id="education">
-            <div class="cvSection educationCvSection" data-default="">Education</div>
-            <div>
-                <div id="filledUniversity0" class="sectionTitle"></div>
-                <div id="filledEducationYear0" class="yearOfActivity"></div>
-                <div  id="filledSpeciality0" class="sectionInfo"></div>
-            </div>
-        </div>
-
-        <div id="job">
-            <div class="cvSection jobCvSection">Yrkeserfaring</div>
-            <div>
-                <div id="filledJobCompany0" class="sectionTitle"></div>
-                <div id="filledJobYear0" class="yearOfActivity"></div>
-                <div id="filledJobTitle0" class="sectionInfo"></div>
-            </div>
-        </div>
-
-        <div id="course">
-            <div class="cvSection courseCvSection">Kurs/etterutdannelse</div>
-            <div>
-                <div id="filledCourseCompany0" class="sectionTitle"></div>
-                <div id="filledCourseYear0" class="yearOfActivity"></div>
-             <div id="filledCourseName0" class="sectionInfo"></div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="rightCvPart">
-    <div class="cvSection languageCvSection">Andre opplysninger</div>
-        <table id="language">
+    <div class="cvTitle">Curriculum Vitae</div>
+        <table class="finalCvSections">
             <tr>
-                <td id="languageSection"></td>
-                <td id="language0"></td>
-                <td id="languageLevel0"></td>
+                <td class="finalCvSectionsTitle">Navn:</td>
+                <td id="filledName"></td>
+            </tr>
+            <tr>
+                <td class="finalCvSectionsTitle">Adresse:</td>
+                <td id="filledAddress"></td>
+            </tr>
+            <tr>
+                <td class="finalCvSectionsTitle">E-post:</td>
+                <td id="filledEmail"></td>
+            </tr>
+            <tr>
+                <td class="finalCvSectionsTitle">Mobil:</td>
+                <td id="filledPhoneNum"></td>
+            </tr>
+            <tr>
+                <td class="finalCvSectionsTitle">Sivilstatus:</td>
+                <td id="filledCivilStatus"></td>
+            </tr>
+            <tr>
+                <td class="finalCvSectionsTitle">Født:</td>
+                <td id="filledBirth"></td>
             </tr>
         </table>
-        <table id="certificate">
+
+    <div class="competenceSection">
+        <p id="competenceSectionTitle">Nøkkelkompetanse</p>
+        <textarea id="competenceSectionText"></textarea>
+    </div>
+
+    <div id="education">
+        <div class="cvSection educationCvSection" data-default="">Education</div>
+        <table class="finalCvSections">
             <tr>
-                <td id="certificateSection"></td>
-                <td id="certificate0"></td>
-                <td id="certificateLevel0"></td>
-            </tr>
-        </table>
-        <table id="hobby">
-            <tr>
-                <td id="hobbySection"></td>
-                <td id="hobby0"></td>
-                <td id="anotherHobby0"></td>
+                <td id="filledEducationYear0" class="finalCvSectionsTitle"></td>
+                <td id="filledUniversity0" class="infoItems"></td>
+                <td id="filledSpeciality0" class="infoItems"></td>
             </tr>
         </table>
     </div>
+
+    <div id="job">
+    <div class="cvSection jobCvSection">Yrkeserfaring</div>
+    <table class="finalCvSections">
+        <tr>
+            <td id="filledJobYear0" class="finalCvSectionsTitle"></td>
+            <td id="filledJobCompany0" class="infoItems"></td>
+            <td id="filledJobTitle0" class="infoItems"></td>
+        </tr>
+    </table>
     </div>
+
+    <div id="course">
+    <div class="cvSection courseCvSection">Kurs/etterutdannelse</div>
+    <table class="finalCvSections">
+        <tr>
+            <td id="filledCourseYear0" class="finalCvSectionsTitle"></td>
+            <td id="filledCourseCompany0" class="infoItems"></td>
+            <td id="filledCourseName0" class="infoItems"></td>
+        </tr>
+    </table>
+    </div>
+
+        <div class="cvSection languageCvSection">Andre opplysninger</div>
+        <table class="finalCvSections" id="language">
+            <tr>
+                <td class="finalCvSectionsTitle">Språk</td>
+                <td id="language0" class="infoItems"></td>
+                <td id="languageLevel0" class="infoItems"></td>
+            </tr>
+        </table>
+        <table class="finalCvSections" id="certificate">
+            <tr>
+                <td class="finalCvSectionsTitle">Sertifikat</td>
+                <td id="certificate0" class="infoItems"></td>
+                <td id="certificateLevel0" class="infoItems"></td>
+            </tr>
+        </table>
+        <table class="finalCvSections" id="hobby">
+            <tr>
+                <td class="finalCvSectionsTitle">Interesser</td>
+                <td id="hobby0" class="infoItems"></td>
+                <td id="anotherHobby0" class="infoItems"></td>
+            </tr>
+        </table>
 </div>
 </body>
 </html>
