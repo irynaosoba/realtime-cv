@@ -14,14 +14,11 @@ $(document).ready(function() {
         $('#' + targetId).text(value);
 
         deleteRow($(this));
-        // showCv();
     })
 
     $("#photo").change(function (event) {
         const newImg = URL.createObjectURL(event.target.files[0]);
         $('#profileImg1').attr('src', newImg);
-
-        // showCv();
     });
 
     $('.education .text-input').keyup(function (){
@@ -64,55 +61,64 @@ $(document).ready(function() {
             $('.otherInfoTable tr:nth-of-type(n+2)').remove();
         });
 
-        $('#photo').each(function () {
+        $('textarea#competence').each(function () {
             $(this).val('');
-            $('#profileImg1').attr('src', 'prof_pic.png');
+            let targetId = $(this).data('target');
+            const target = $('#' + targetId);
+            let defaultValue = target.data('default');
+            if (!defaultValue){
+                defaultValue = "";
+            }
+            target.text(defaultValue);
         });
+    })
 
-        $('.leftCvPart .cvSection').each(function () {
-            $(this).css('display', 'none');
-        });
-
-        $('.rightCvPart .cvSection').each(function () {
-            $(this).css('display', 'none');
-        });
+    $('textarea#competence').keyup(function () {
+        let message = $(this).val();
+        let targetId = $(this).data('target');
+        $('#' + targetId).text(message);
     })
 });
 
-function addNewRow(input, section){
+function addNewRow(input, section) {
     const parentTable = $(input).parents('.tables');
     const parentTr = $(input).parents('tr');
     const tableTrs = parentTable.find('tr');
     const trIndex = tableTrs.index(parentTr);
     const trLength = tableTrs.length;
 
-    if (trIndex === trLength - 1){
-        switch (section){
+    let allInputsFilled = true;
+    parentTr.find('.text-input').each(function () {
+        if (!$(this).val()) {
+            allInputsFilled = false;
+        }
+    });
+
+    if ((trIndex === trLength - 1) && allInputsFilled) {
+        switch (section) {
             case 'education':
                 const newTrEducation = $('<tr>\n' +
                     `            <td><input class="text-input" type="text" maxlength="11" data-target="filledEducationYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledUniversity${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledSpeciality${trIndex}"></td>\n` +
+                    `            <td><input type="button" class="resetButton" data-target="educationButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
                     '        </tr>');
-                newTrEducation.find('.text-input').keyup(function (){
+                newTrEducation.find('.text-input').keyup(function () {
                     let value = $(this).val();
                     const targetId = $(this).data('target');
                     $('#' + targetId).text(value);
                     addNewRow($(this), 'education')
                     deleteRow($(this));
                 });
-
                 parentTable.append(newTrEducation);
 
-                const newDivEducation = $('<div>\n' +
-                    `                <div id="filledUniversity${trIndex}" class="sectionTitle"></div>\n` +
-                    `                <div id="filledEducationYear${trIndex}" class="yearOfActivity"></div>\n` +
-                    `                <div  id="filledSpeciality${trIndex}" class="sectionInfo"></div>\n` +
-                    '            </div>');
+                const newDivEducation = $('<tr class="finalCvItemsTr">\n' +
+                    `                <td id="filledEducationYear${trIndex}" class="finalCvSectionsTitle finalCvItemsTd"></td>\n` +
+                    `                <td id="filledUniversity${trIndex}" class="infoItems finalCvItemsTd"></td>\n` +
+                    `                <td id="filledSpeciality${trIndex}" class="infoItems finalCvItemsTd"></td>\n` +
+                    '            </tr>');
 
-                $('#education').append(newDivEducation);
-
-                showCvSection('education')
+                $('#education .finalCvSections').append(newDivEducation);
                 break;
 
             case 'job':
@@ -120,6 +126,7 @@ function addNewRow(input, section){
                     `            <td><input class="text-input" type="text" maxlength="11" data-target="filledJobYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledJobCompany${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledJobTitle${trIndex}"></td>\n` +
+                    `            <td><input type="button" class="resetButton" data-target="jobButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
                     '        </tr>');
                 newTrJob.find('.text-input').keyup(function () {
                     let value = $(this).val();
@@ -131,23 +138,22 @@ function addNewRow(input, section){
 
                 parentTable.append(newTrJob);
 
-                const newDivJob = $('<div>\n' +
-                    `                <div id="filledJobCompany${trIndex}" class="sectionTitle"></div>\n` +
-                    `                <div id="filledJobYear${trIndex}" class="yearOfActivity"></div>\n` +
-                    `                <div  id="filledJobTitle${trIndex}" class="sectionInfo"></div>\n` +
-                    '            </div>');
+                const newDivJob = $('<tr>\n' +
+                    `                <td id="filledJobYear${trIndex}" class="finalCvSectionsTitle"></td>\n` +
+                    `                <td id="filledJobCompany${trIndex}" class="infoItems"></td>\n` +
+                    `                <td  id="filledJobTitle${trIndex}" class="infoItems"></td>\n` +
+                    '            </tr>');
 
-                $('#job').append(newDivJob);
-
-                showCvSection('job')
+                $('#job .finalCvSections').append(newDivJob);
                 break;
 
             case 'course':
                 const newTrCourse = $('<tr>\n' +
-                        `            <td><input class="text-input" type="text" maxlength="11" data-target="filledCourseYear${trIndex}"></td>\n` +
-                        `            <td><input class="text-input" type="text" data-target="filledCourseCompany${trIndex}"></td>\n` +
-                        `            <td><input class="text-input" type="text" data-target="filledCourseName${trIndex}"></td>\n` +
-                        '        </tr>');
+                    `            <td><input class="text-input" type="text" maxlength="11" data-target="filledCourseYear${trIndex}"></td>\n` +
+                    `            <td><input class="text-input" type="text" data-target="filledCourseCompany${trIndex}"></td>\n` +
+                    `            <td><input class="text-input" type="text" data-target="filledCourseName${trIndex}"></td>\n` +
+                    `            <td><input type="button" class="resetButton" data-target="courseButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
+                    '        </tr>');
                 newTrCourse.find('.text-input').keyup(function () {
                     let value = $(this).val();
                     const targetId = $(this).data('target');
@@ -158,21 +164,21 @@ function addNewRow(input, section){
 
                 parentTable.append(newTrCourse);
 
-                const newDivCourse = $('<div>\n' +
-                    `                <div id="filledCourseCompany${trIndex}" class="sectionTitle"></div>\n` +
-                    `                <div id="filledCourseYear${trIndex}" class="yearOfActivity"></div>\n` +
-                    `                <div  id="filledCourseName0${trIndex}" class="sectionInfo"></div>\n` +
-                    '            </div>');
+                const newDivCourse = $('<tr>\n' +
+                    `                <td id="filledCourseYear${trIndex}" class="finalCvSectionsTitle"></td>\n` +
+                    `                <td id="filledCourseCompany${trIndex}" class="infoItems"></td>\n` +
+                    `                <td  id="filledCourseName0${trIndex}" class="infoItems"></td>\n` +
+                    '            </tr>');
 
-                $('#course').append(newDivCourse)
-                showCvSection('course')
+                $('#course .finalCvSections').append(newDivCourse)
                 break;
 
             case 'language':
                 const newTrLanguage = $('<tr>\n' +
                     `            <td><input value="Språk" readonly></td>\n` +
-                    `            <td><input class="text-input" type="text" data-target="language${trIndex +1}"></td>\n` +
-                    `            <td><input class="text-input" type="text" data-target="languageLevel${trIndex +1}"></td>\n` +
+                    `            <td><input class="text-input" type="text" data-target="language${trIndex + 1}"></td>\n` +
+                    `            <td><input class="text-input" type="text" data-target="languageLevel${trIndex + 1}"></td>\n` +
+                    `            <td><input type="button" class="resetButton" data-target="languageButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
                     '        </tr>');
                 newTrLanguage.find('.text-input').keyup(function () {
                     let value = $(this).val();
@@ -185,13 +191,12 @@ function addNewRow(input, section){
                 parentTable.append(newTrLanguage);
 
                 const newDivLanguage = $('<tr>\n' +
-                    `            <td></td>\n` +
-                    `            <td id="language${trIndex + 1}"></td>\n` +
-                    `            <td id="languageLevel${trIndex + 1}"></td>\n` +
+                    `            <td class="finalCvSectionsTitle"></td>\n` +
+                    `            <td id="language${trIndex + 1}" class="infoItems"></td>\n` +
+                    `            <td id="languageLevel${trIndex + 1}" class="infoItems"></td>\n` +
                     '        </tr>');
 
                 $('#language').append(newDivLanguage)
-                showCvSection('language')
                 break;
 
             case 'certificate':
@@ -199,6 +204,8 @@ function addNewRow(input, section){
                     '            <td><input value="Sertifikat" readonly></td>\n' +
                     `            <td><input class="text-input" type="text" data-target="certificate${trIndex + 1}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="certificateLevel${trIndex + 1}"></td>\n` +
+                    `            <td><input type="button" class="resetButton" data-target="certificateButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
+
                     '        </tr>');
                 newTrCertificate.find('.text-input').keyup(function () {
                     let value = $(this).val();
@@ -216,13 +223,13 @@ function addNewRow(input, section){
                     '        </tr>');
 
                 $('#certificate').append(newDivCertificate)
-                showCvSection('language')
                 break;
             case 'hobby':
                 const newTrHobby = $('<tr>\n' +
                     '            <td><input value="Interesser" readonly></td>\n' +
                     `            <td><input class="text-input" type="text" data-target="hobby${trIndex + 1}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="anotherHobby${trIndex + 1}"></td>\n` +
+                    `            <td><input type="button" class="resetButton" data-target="hobbyButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
                     '        </tr>');
                 newTrHobby.find('.text-input').keyup(function () {
                     let value = $(this).val();
@@ -240,17 +247,9 @@ function addNewRow(input, section){
                     `            <td id="anotherHobby${trIndex + 1}"></td>\n` +
                     '        </tr>');
 
-                $('#hobby').append(newDivHobby)
-                showCvSection('language')
+                $('#hobby .finalCvSections').append(newDivHobby)
                 break;
-                    }
-                }
-    }
-
-function showCvSection(section) {
-    const finalCvSections = $('.' + section + 'CvSection');
-    if (finalCvSections.css('display') === 'none'){
-        finalCvSections.css('display', 'block');
+        }
     }
 }
 
@@ -267,16 +266,39 @@ function deleteRow(input){
         });
 
         if (allInputsEmpty){
+            let targetId = $(input).closest('tr').find('input:eq(1)');
+            let tdTarget = targetId.data('target');
+            $('#' + tdTarget).closest('tr').remove();
             parentTr.remove();
         }
     }
 }
 
-// function showCv() {
-//     const finalCvDiv = $('.finalCv')
-//     if (finalCvDiv.css('display') === 'none'){
-//         finalCvDiv.css('display', 'block');
-//         finalCvDiv.css('width', '60%');
-//         $('.inputCvData').css('width', '40%');
-//     }
-// }
+function deleteRowWithButton(){
+
+    $('.tables').on('click', 'input[type="button"]', function(e){
+        let closestTable = $(this).closest('table').find('tr').length;
+        let targetId = $(this).closest('tr').find('input:eq(1)');
+        let tdTarget = targetId.data('target');
+        if (closestTable > 2) {
+            $('#' + tdTarget).parents('tr').remove();
+            $(this).closest('tr').remove();
+        } else {
+            $(this).closest('tr').find('input.text-input').val('');
+            $('#' + tdTarget).closest('tr').find('td').empty();
+        }
+    })
+}
+
+function checkEmail() {
+    let emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    let emailValue = $("#email").val();
+    if (!emailReg.test(emailValue)){
+        $("#email").val('try again');
+        $('#email').css( "color", "#FF5F6D");
+        let emailTarget = $('#email').data('target');
+        $('#' + emailTarget).empty();
+    } else {
+        $('#email').css( "color", "#000000");
+    }
+}
