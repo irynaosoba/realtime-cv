@@ -14,9 +14,9 @@ body {
 }
 
 .finalCv {
-    /*display: none;*/
-    width: 60%;
-    transition: width 700ms;
+    margin: 0 auto;
+    width: 50%;
+    font-family: Calibri, sans-serif;
 }
 
 .mainInfo {
@@ -33,6 +33,7 @@ input {
     height: 25px;
     background-color: #EBF0F2;
     outline: none;
+    word-break: break-word;
 }
 
 th {
@@ -41,26 +42,8 @@ th {
     font-size: 12pt;
 }
 
-.mainPartOfCv {
-    /*height: 132px;*/
-    background-color: #f6fcf9;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: center;
-}
-
-.mainInfoContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.profPic {
-    width: 112px;
-    height: 112px;
-    border-radius: 50%;
+.text-input td{
+    min-height: 16px;
 }
 
 #reset {
@@ -75,76 +58,118 @@ th {
     color: #000000;
 }
 
-.profPictureContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    width: 200px;
+#competence{
+    width: 540px;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+    outline: none;
 }
 
-#nameContainer {
-    float: left;
-    width: 30%;
-    font-size: 16px;
+.cvTitle{
+    font-size: 26px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-bottom: 16px;
+    margin-left: 5px;
+    color: #4E81BD;
 }
 
-.leftCvPart {
-    margin: 17px 6px 6px;
-    padding: 11px;
-    float: left;
-    width: 45%;
+table.finalCvSections{
+    width: 100%;
+    padding-bottom: 16px;
+    border-collapse: collapse;
+    word-break: break-word;
 }
 
-.rightCvPart {
-    margin: 17px 6px 6px;
-    padding: 11px;
-    float: right;
-    width: 45%;
+table.finalCvSections td{
+    border: 1px solid #000000;
+}
+
+table#certificate tr:last-child > td{
+    border-bottom: none;
+}
+
+table#language tr:last-child > td{
+    border-bottom: none;
+}
+
+.finalCvSectionsTitle{
+    font-weight: bold;
+    font-size: 11px;
+    width: 80px;
+}
+
+.infoItems{
+    font-size: 11px;
+    width: 300px;
+
+    word-break: break-word;
+}
+
+.resetButton{
+    height: 27px;
+    width: 15px;
+    margin-top: 2px;
+    border: none;
+    border-radius: 5px;
+    display: table-cell;
+    background-image: url("remove.png");
+    background-size: cover;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.competenceSection{
+    margin-top: 20px;
+    padding-top: 5px;
+    width: 97%;
+    height: 120px;
+    font-size: 10px;
+    background-color: #DBE5F1;
+    border: 1px solid #000000;
+}
+
+#competenceSectionTitle{
+    margin: 0;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+#competenceSectionText{
+    width: 80%;
+    height: 80%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+#competence{
+    height: 90px;
+}
+
+.finalCvItemsTr{
+    width: 100%;
+}
+
+.finalCvItemsTd{
+    border: thin solid #000000;
+    border-collapse: collapse;
 }
 
 .cvSection{
-    margin-bottom: 8px;
-    font-size: 16px;
+    margin: 14px 6px;
+    font-size: 14px;
     font-weight: bold;
+    color: #4E81BD;
 }
 
-.leftCvPart .cvSection {
-    display: none;
+table.finalCvSections{
+    font-size: 11px;
 }
 
-.rightCvPart .cvSection {
-    display: none;
-}
-
-.sectionTitle {
-    float: left;
-    width: 70%;
-    margin-bottom: 5px;
-
-    font-size: 15px;
-    font-weight: bold;
-    word-break: break-word;
-}
-
-.yearOfActivity{
-    padding-right: 17px;
-    float: right;
-    width: 23%;
-
-    font-size: 12px;
-    text-align: right;
-    font-style: italic;
-}
-
-.sectionInfo{
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 15px;
-    font-size: 13px;
-    word-break: break-word;
+table.finalCvSections tr td{
+    height: 16px;
 }
 
 #imageUpload {
@@ -169,12 +194,6 @@ th {
 
 .tables {
     width: 100%;
-}
-
-#filledName {
-    margin-right: 50px;
-    font-weight: 600;
-    font-size: 17px;
 }
 
 .tables.otherInfoTable tr:nth-of-type(n+2) td:first-of-type input {
