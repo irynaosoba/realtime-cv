@@ -5,6 +5,7 @@
     <title>CV template</title>
     <link rel="stylesheet" href="cv_funkweb.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript" src="cv_funkweb.js"></script>
 </head>
 <body>
@@ -52,7 +53,7 @@
             <th>Speciality</th>
         </tr>
         <tr>
-            <td><input class="text-input" type="text" maxlength="11" data-target="filledEducationYear0"></td>
+            <td><input class="text-input datepicker" type="text"  data-target="filledEducationYear0"></td>
             <td><input class="text-input" type="text" data-target="filledUniversity0"></td>
             <td><input class="text-input" type="text" data-target="filledSpeciality0"></td>
             <td><input type="button" class="resetButton" data-target="educationButton0" onclick="deleteRowWithButton()"></td>
@@ -67,7 +68,7 @@
             <th>Title</th>
         </tr>
         <tr>
-            <td><input class="text-input" type="text" maxlength="11" data-target="filledJobYear0"></td>
+            <td><input class="text-input datepicker" type="text" maxlength="11" data-target="filledJobYear0"></td>
             <td><input class="text-input" type="text" data-target="filledJobCompany0"></td>
             <td><input class="text-input" type="text" data-target="filledJobTitle0"></td>
             <td><input type="button" class="resetButton" data-target="jobButton0" onclick="deleteRowWithButton()"></td>
@@ -82,7 +83,7 @@
             <th>Course</th>
         </tr>
         <tr>
-            <td><input class="text-input" type="text" maxlength="11" data-target="filledCourseYear0"></td>
+            <td><input class="text-input datepicker" type="text" maxlength="11" data-target="filledCourseYear0"></td>
             <td><input class="text-input" type="text" data-target="filledCourseCompany0"></td>
             <td><input class="text-input" type="text" data-target="filledCourseName0"></td>
             <td><input type="button" class="resetButton" data-target="courseButton0" onclick="deleteRowWithButton()"></td>
