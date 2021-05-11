@@ -8,6 +8,36 @@ $(document).ready(function() {
         $(this).css('background', '')
     })
 
+    $(function (){
+        $('.datepicker').datepicker({
+            dateFormat: "M yy",
+            changeYear: true,
+            changeMonth: true
+        });
+     });
+
+    $(function (){
+        $('#birth').datepicker({
+            dateFormat: "M, d yy",
+            changeYear: true,
+            changeMonth: true
+        });
+    });
+
+    $('#birth').change(function (event) {
+        let value = $(this).val();
+        const targetId = $(this).data('target');
+        $('#' + targetId).text(value);
+    });
+
+    $('.datepicker').change(function (event) {
+        let value = $(this).val();
+        const targetId = $(this).data('target');
+        $('#' + targetId).text(value);
+
+        deleteRow($(this));
+    });
+
     inputs.keyup(function () {
         let value = $(this).val();
         const targetId = $(this).data('target');
@@ -98,7 +128,7 @@ function addNewRow(input, section) {
         switch (section) {
             case 'education':
                 const newTrEducation = $('<tr>\n' +
-                    `            <td><input class="text-input" type="text" maxlength="11" data-target="filledEducationYear${trIndex}"></td>\n` +
+                    `            <td><input class="text-input datepicker" type="text" maxlength="11" data-target="filledEducationYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledUniversity${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledSpeciality${trIndex}"></td>\n` +
                     `            <td><input type="button" class="resetButton" data-target="educationButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
@@ -110,7 +140,21 @@ function addNewRow(input, section) {
                     addNewRow($(this), 'education')
                     deleteRow($(this));
                 });
+
                 parentTable.append(newTrEducation);
+                newTrEducation.find('.datepicker').datepicker({
+                    dateFormat: "M yy",
+                    changeYear: true,
+                    changeMonth: true
+                });
+
+                newTrEducation.find('.datepicker').change(function () {
+                    let value = $(this).val();
+                    const targetId = $(this).data('target');
+                    $('#' + targetId).text(value);
+                    addNewRow($(this), 'job');
+                    deleteRow($(this));
+                });
 
                 const newDivEducation = $('<tr class="finalCvItemsTr">\n' +
                     `                <td id="filledEducationYear${trIndex}" class="finalCvSectionsTitle finalCvItemsTd"></td>\n` +
@@ -123,7 +167,7 @@ function addNewRow(input, section) {
 
             case 'job':
                 const newTrJob = $('<tr>\n' +
-                    `            <td><input class="text-input" type="text" maxlength="11" data-target="filledJobYear${trIndex}"></td>\n` +
+                    `            <td><input class="text-input datepicker" type="text" maxlength="11" data-target="filledJobYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledJobCompany${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledJobTitle${trIndex}"></td>\n` +
                     `            <td><input type="button" class="resetButton" data-target="jobButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
@@ -136,7 +180,20 @@ function addNewRow(input, section) {
                     deleteRow($(this));
                 });
 
-                parentTable.append(newTrJob);
+                parentTable.append(newTrJob)
+                newTrJob.find('.datepicker').datepicker({
+                    dateFormat: "M yy",
+                    changeYear: true,
+                    changeMonth: true
+                });
+
+                newTrJob.find('.datepicker').change(function () {
+                    let value = $(this).val();
+                    const targetId = $(this).data('target');
+                    $('#' + targetId).text(value);
+                    addNewRow($(this), 'job');
+                    deleteRow($(this));
+                });
 
                 const newDivJob = $('<tr>\n' +
                     `                <td id="filledJobYear${trIndex}" class="finalCvSectionsTitle"></td>\n` +
@@ -149,7 +206,7 @@ function addNewRow(input, section) {
 
             case 'course':
                 const newTrCourse = $('<tr>\n' +
-                    `            <td><input class="text-input" type="text" maxlength="11" data-target="filledCourseYear${trIndex}"></td>\n` +
+                    `            <td><input class="text-input datepicker" type="text" maxlength="11" data-target="filledCourseYear${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledCourseCompany${trIndex}"></td>\n` +
                     `            <td><input class="text-input" type="text" data-target="filledCourseName${trIndex}"></td>\n` +
                     `            <td><input type="button" class="resetButton" data-target="courseButton${trIndex}" onclick="deleteRowWithButton()"></td>\n` +
@@ -163,6 +220,20 @@ function addNewRow(input, section) {
                 });
 
                 parentTable.append(newTrCourse);
+
+                newTrCourse.find('.datepicker').datepicker({
+                    dateFormat: "M yy",
+                    changeYear: true,
+                    changeMonth: true
+                });
+
+                newTrCourse.find('.datepicker').change(function () {
+                    let value = $(this).val();
+                    const targetId = $(this).data('target');
+                    $('#' + targetId).text(value);
+                    addNewRow($(this), 'job');
+                    deleteRow($(this));
+                });
 
                 const newDivCourse = $('<tr>\n' +
                     `                <td id="filledCourseYear${trIndex}" class="finalCvSectionsTitle"></td>\n` +
@@ -275,7 +346,6 @@ function deleteRow(input){
 }
 
 function deleteRowWithButton(){
-
     $('.tables').on('click', 'input[type="button"]', function(e){
         let closestTable = $(this).closest('table').find('tr').length;
         let targetId = $(this).closest('tr').find('input:eq(1)');
