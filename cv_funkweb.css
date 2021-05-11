@@ -200,11 +200,6 @@ table.finalCvSections tr td{
     display: none;
 }
 
-.ui-datepicker {
-    height: auto;
-    margin: 5px auto 0;
-}
-
 .ui-datepicker a {
     text-decoration: none;
 }
